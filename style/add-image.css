@@ -1,0 +1,101 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0e8d9;
+    color: #6e745e;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #7b856d;
+}
+
+.add-image-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: #E7CCCC;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.add-image-btn:hover {
+    background-color: #bfa3a0;
+}
+
+.image-form {
+    background-color: #dcd9d4;
+    border-radius: 15px;
+    padding: 30px;
+    width: 350px;
+    margin: 0 auto;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.image-form h2 {
+    color: #A5B68D;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.image-form label {
+    display: block;
+    font-size: 1.1em;
+    color: #7b856d;
+    margin-bottom: 5px;
+}
+
+.image-form input {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.submit-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: #E7CCCC;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+.submit-btn:hover {
+    background-color: #bfa3a0;
+}
+
+.gallery {
+    margin-top: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+#image-form-container {
+    margin-bottom: 40px;
+}

@@ -1,0 +1,132 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0e8d9;
+    color: #6e745e;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #A5B68D;
+}
+
+.add-image-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: #E7CCCC;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: 50px 1fr 50px; 
+    align-items: center;
+    margin-top: 40px;
+    background-color: #E5E4E4;
+    border: 5px solid #E7CCCC;
+    border-radius: 15px;
+    padding: 20px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    font-size: 2.5em;
+    color: #ccc;
+    cursor: pointer;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-btn.disabled {
+    visibility: hidden; 
+}
+
+.nav-btn.left {
+    grid-column: 1; 
+}
+
+.nav-btn.right {
+    grid-column: 3; 
+}
+
+.gallery {
+    grid-column: 2; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.gallery {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.image-title {
+    font-size: 1.5em;
+    color: #A5B68D;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%; 
+}
+
+.gallery-image {
+    width: 399px;
+    height: 397px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.image-author {
+    font-size: 1.3em;
+    color: #7D8D8A;
+    margin-top: 10px;
+}
+
+.delete-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: #E7CCCC;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    margin-bottom: 40px;
+}

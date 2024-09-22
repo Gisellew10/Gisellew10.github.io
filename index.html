@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Web Gallery</title>
+    <link rel="stylesheet" href="style/add-image.css">
+    <link rel="stylesheet" href="style/home.css">
+    <link rel="stylesheet" href="style/comment-form.css">
+    <link rel="stylesheet" href="style/comment-section.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to The Web Gallery</h1>
+        <button id="toggle-form" class="add-image-btn">Add Image</button>
+
+        <!-- Image Form -->
+        <div id="image-form-container" class="image-form hidden">
+            <h2>Add Image</h2>
+            <form id="image-form">
+                <label for="title">Title</label>
+                <input type="text" id="title" placeholder="Enter the image title" required>
+
+                <label for="author">Author's Name</label>
+                <input type="text" id="author" placeholder="Enter the author's name" required>
+
+                <label for="url">URL</label>
+                <input type="url" id="url" placeholder="Enter the image URL" required>
+
+                <button type="submit" class="submit-btn">Upload</button>
+            </form>
+        </div>
+
+        <!-- Gallery Display -->
+        <div class="gallery-container">
+            <button id="prev-btn" class="nav-btn hidden">&#9664;</button>
+            <div id="gallery" class="gallery"></div>
+            <button id="next-btn" class="nav-btn hidden">&#9654;</button>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="comment-form">
+            <h2>Write a Comment</h2>
+            <form id="comment-form">
+                <label for="comment-author">Author's Name</label>
+                <input type="text" id="comment-author" placeholder="Enter the author's name" required>
+
+                <label for="comment-content">Comment</label>
+                <textarea id="comment-content" placeholder="Enter the comment" required></textarea>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+
+        <!-- Comment Section -->
+        <div class="comment-section">
+            <h2 class="hidden">Comments</h2>
+            <div class="button-section">
+                <button id="prev-comments" class="nav-btn hidden">&#9664;</button>  <!-- Left arrow -->
+                <button id="next-comments" class="nav-btn hidden">&#9654;</button>  <!-- Right arrow -->
+            </div>
+
+            <div id="comments-list"></div> <!-- Dynamic Comments will be added here -->
+        </div>
+
+
+    </div>
+
+    <script type="module" src="js/controller.mjs"></script>
+    <footer>
+        <a href="/credits.html">credits</a>
+    </footer>
+</html>
