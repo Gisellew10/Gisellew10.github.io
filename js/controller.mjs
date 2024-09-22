@@ -171,10 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     nextCommentsBtn.addEventListener('click', () => {
-        if ((currentCommentPage + 1) * commentsPerPage < getComments(images[currentIndex].imageId).length) {
-            currentCommentPage++;
-            loadComments();
-        }
+        currentCommentPage++;
+        loadComments();
     });
 
     function loadImages() {
