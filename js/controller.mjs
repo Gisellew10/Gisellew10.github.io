@@ -40,30 +40,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = document.getElementById('title').value;
         const author = document.getElementById('author').value;
         const url = document.getElementById('url').value;
-
-        // Check if the provided URL is a valid direct image URL
+    
         if (!isDirectImageURL(url)) {
             urlError.textContent = 'Please enter a valid direct image URL (must end with .jpg, .jpeg, .png, or .gif).';
             urlError.style.display = 'block'; 
             return;
         }
-
+    
         urlError.style.display = 'none'; 
-
+    
         if (title && author && url) {
-            addImage(title, author, url);
-            formContainer.classList.add('hidden'); // Hide form after submission
-            imageForm.reset(); // Clear form fields
+            addImage(title, author, url); 
+            formContainer.classList.add('hidden'); 
+            imageForm.reset(); 
             
-            // Immediately show the new image without refreshing
+            // Reset the gallery and show the new image
             loadImages(); 
-            
-            // Ensure gallery and comment form are shown
             galleryContainer.classList.remove('hidden'); 
-            commentForm.classList.remove('hidden'); 
-            commentSection.classList.add('hidden'); 
+            commentForm.classList.remove('hidden');
+            commentSection.classList.add('hidden');
         }
     });
+    
 
     // Function to validate if a URL is a direct image URL
     function isDirectImageURL(url) {
@@ -190,11 +188,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load images from localStorage and display them
     function loadImages() {
         images = getImages();
-
-        if (currentIndex >= images.length) {
-            currentIndex = images.length - 1;
+    
+        if (images.length === 0) {
+            currentIndex = 0;  
+            galleryContainer.classList.add('hidden');
+            commentForm.classList.add('hidden');
+            commentSection.classList.add('hidden');
+            return;  
         }
-
-        displayImage();
+    
+        if (currentIndex >= images.length || images.length === 1) {
+            currentIndex = 0;
+        }
+    
+        displayImage(); 
     }
+    
 });
