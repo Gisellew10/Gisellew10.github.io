@@ -194,10 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener for the next comments button
     nextCommentsBtn.addEventListener('click', () => {
-        if ((currentCommentPage + 1) * commentsPerPage < getComments(images[currentIndex].imageId).length) {
-            currentCommentPage++;
-            loadComments();
-        }
+        currentCommentPage++;
+        loadComments();
     });
 
     // Load images from localStorage and display them
