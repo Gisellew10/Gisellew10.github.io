@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Handle form submission to add a new image
-    imageForm.addEventListener('submit', (event) => {
+    imageForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const title = document.getElementById('title').value;
         const author = document.getElementById('author').value;
@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
         urlError.style.display = 'none'; 
     
         if (title && author && url) {
-            addImage(title, author, url); 
+            await addImage(title, author, url);  // Wait for addImage to complete
             formContainer.classList.add('hidden'); 
             imageForm.reset(); 
             
             // Reset the gallery and show the new image
-            loadImages(); 
+            await loadImages();  // Wait for loadImages to complete
             galleryContainer.classList.remove('hidden'); 
             commentForm.classList.remove('hidden');
             commentSection.classList.add('hidden');
@@ -70,15 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle comment form submission
-    commentFormElement.addEventListener('submit', (event) => {
+    commentFormElement.addEventListener('submit', async (event) => {
         event.preventDefault();
         const commentAuthor = document.getElementById('comment-author').value;
         const commentContent = document.getElementById('comment-content').value;
 
         if (images.length > 0 && commentAuthor && commentContent) {
-            addComment(images[currentIndex].imageId, commentAuthor, commentContent);
+            await addComment(images[currentIndex].imageId, commentAuthor, commentContent);  // Wait for addComment to complete
             commentFormElement.reset();
-            loadComments(); 
+            await loadComments();  // Wait for loadComments to complete
         }
     });
 
@@ -125,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn.classList.toggle('hidden', currentIndex === images.length - 1);
 
         // Delete image functionality
-        document.getElementById('delete-btn').addEventListener('click', () => {
-            deleteImage(image.imageId);
-            loadImages();
+        document.getElementById('delete-btn').addEventListener('click', async () => {
+            await deleteImage(image.imageId);  // Wait for deleteImage to complete
+            await loadImages();  // Reload images after deletion
         });
 
         // Load comments for the current image
@@ -135,8 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to load comments for the current image with pagination
-    function loadComments() {
-        const comments = getComments(images[currentIndex].imageId);
+    async function loadComments() {
+        const comments = await getComments(images[currentIndex].imageId);  // Ensure getComments is awaited
         
         // Sort comments by date (most recent first)
         comments.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -165,17 +165,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Attach delete functionality to each comment
         document.querySelectorAll('.delete-comment-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                deleteComment(button.dataset.id);
+            button.addEventListener('click', async () => {
+                await deleteComment(button.dataset.id);  // Wait for deleteComment to complete
                 
-                const remainingComments = getComments(images[currentIndex].imageId).length;
-                
+                const remainingComments = await getComments(images[currentIndex].imageId);  // Reload comments
+
                 // Check if the deleted comment was the only one on the current page
                 if (visibleComments.length === 1 && currentCommentPage > 0) {
-                    currentCommentPage--; // Go to the previous page
+                    currentCommentPage--;  // Go to the previous page
                 }
 
-                loadComments(); 
+                loadComments();  // Reload comments after deletion
             });
         });
 
@@ -199,8 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Load images from localStorage and display them
-    function loadImages() {
-        images = getImages();
+    async function loadImages() {
+        images = await getImages();  // Ensure getImages is awaited
     
         if (images.length === 0) {
             currentIndex = 0;  
