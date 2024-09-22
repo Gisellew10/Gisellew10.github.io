@@ -101,12 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to display the current image in the gallery
     function displayImage() {
         if (images.length === 0) {
+            // Hide the gallery container and comment form if there are no images
             galleryContainer.classList.add('hidden');
             commentForm.classList.add('hidden');
             commentSection.classList.add('hidden');
             return;
         }
 
+        // Show the gallery container and the comment form if there are images
         galleryContainer.classList.remove('hidden');
         commentForm.classList.remove('hidden'); 
         
@@ -118,31 +120,40 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="submit-btn delete-btn" id="delete-btn">Delete</button>
         `;
 
+        // Show or hide navigation buttons
         prevBtn.classList.toggle('hidden', currentIndex === 0);
         nextBtn.classList.toggle('hidden', currentIndex === images.length - 1);
 
+        // Delete image functionality
         document.getElementById('delete-btn').addEventListener('click', () => {
             deleteImage(image.imageId);
             loadImages();
         });
 
+        // Load comments for the current image
         loadComments();
     }
 
-    // Load comments for the current image with pagination
+    // Function to load comments for the current image with pagination
     function loadComments() {
         const comments = getComments(images[currentIndex].imageId);
-        comments.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by most recent first
+        
+        // Sort comments by date (most recent first)
+        comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
         const commentsPerPage = 10;
         const visibleComments = comments.slice(currentCommentPage * commentsPerPage, (currentCommentPage + 1) * commentsPerPage);
+        const commentSectionHeader = document.querySelector('.comment-section h2');
         const commentSection = document.querySelector('.comment-section');
 
+        // Check if there are any comments
         if (comments.length === 0) {
             commentSection.classList.add('hidden'); 
         } else {
             commentSection.classList.remove('hidden'); 
         }
 
+        // Render the comments
         commentsList.innerHTML = visibleComments.map(comment => `
             <div class="comment">
                 <p class="author">${comment.author}</p>
@@ -152,17 +163,28 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
+        // Attach delete functionality to each comment
         document.querySelectorAll('.delete-comment-btn').forEach(button => {
             button.addEventListener('click', () => {
                 deleteComment(button.dataset.id);
+                
+                const remainingComments = getComments(images[currentIndex].imageId).length;
+                
+                // Check if the deleted comment was the only one on the current page
+                if (visibleComments.length === 1 && currentCommentPage > 0) {
+                    currentCommentPage--; // Go to the previous page
+                }
+
                 loadComments(); 
             });
         });
 
+        // Handle pagination of comments
         prevCommentsBtn.classList.toggle('hidden', currentCommentPage === 0);
         nextCommentsBtn.classList.toggle('hidden', (currentCommentPage + 1) * commentsPerPage >= comments.length);
     }
 
+    // Event listener for the previous comments button
     prevCommentsBtn.addEventListener('click', () => {
         if (currentCommentPage > 0) {
             currentCommentPage--;
@@ -170,11 +192,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Event listener for the next comments button
     nextCommentsBtn.addEventListener('click', () => {
-        currentCommentPage++;
-        loadComments();
+        if ((currentCommentPage + 1) * commentsPerPage < getComments(images[currentIndex].imageId).length) {
+            currentCommentPage++;
+            loadComments();
+        }
     });
 
+    // Load images from localStorage and display them
     function loadImages() {
         images = getImages();
     
@@ -192,4 +218,5 @@ document.addEventListener('DOMContentLoaded', () => {
     
         displayImage(); 
     }
+    
 });
